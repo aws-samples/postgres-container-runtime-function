@@ -23,7 +23,7 @@ AWS Python Lambda functions, by default, face challenges when connecting to Post
 
 1. Clone this repository:
    ```bash
-   git clone [https://github.com/yourusername/lambda-postgres-container.git](https://github.com/aws-samples/postgres-container-runtime-function.git)
+   git clone https://github.com/aws-samples/postgres-container-runtime-function.git
    cd postgres-container-runtime-function
    ```
 
