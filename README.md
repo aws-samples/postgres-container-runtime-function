@@ -1,17 +1,16 @@
-# Lambda PostgreSQL Container Solution
+# PostgreSQL Container Runtime Solution
 
 This project provides a solution for connecting AWS Lambda functions to PostgreSQL databases using custom container runtimes. It overcomes the default runtime limitations, enabling seamless integration between Lambda and PostgreSQL RDS instances.
 
 ## Overview
 
-AWS Lambda functions, by default, face challenges when connecting to PostgreSQL RDS instances. This solution leverages custom container runtimes to include all necessary dependencies, allowing Lambda functions to establish PostgreSQL connections efficiently.
+AWS Python Lambda functions, by default, face challenges when connecting to PostgreSQL RDS instances. While Lambda layers can extend the Python runtime with libraries to enable connections to PostgreSQL databases, the in-console code editor's runtime lacks the dependencies needed to utilize the libraries. This solution leverages custom container runtimes to include all necessary dependencies, allowing Lambda functions to establish PostgreSQL connections efficiently.
 
 ## Features
 
-- Custom Docker container for AWS Lambda
+- Docker file that creates container image for AWS Lambda container runtime support
 - PostgreSQL connectivity using pg8000
-- Easy deployment to AWS Lambda
-- Scalable and maintainable serverless database operations
+- Instructions to create container and deploy to AWS ECR
 
 ## Prerequisites
 
@@ -24,13 +23,13 @@ AWS Lambda functions, by default, face challenges when connecting to PostgreSQL 
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/lambda-postgres-container.git
-   cd lambda-postgres-container
+   git clone [https://github.com/yourusername/lambda-postgres-container.git](https://github.com/aws-samples/postgres-container-runtime-function.git)
+   cd postgres-container-runtime-function
    ```
 
 2. Build the Docker image:
    ```bash
-   docker build --platform linux/amd64 -t lambda-postgres-image .
+   docker build --platform linux/amd64 -t postgres-container-runtime-function .
    ```
 
 3. Authenticate with Amazon ECR:
@@ -40,8 +39,8 @@ AWS Lambda functions, by default, face challenges when connecting to PostgreSQL 
 
 4. Tag and push the image to ECR:
    ```bash
-   docker tag lambda-postgres-image:latest your-account-id.dkr.ecr.your-region.amazonaws.com/lambda-postgres-image:latest
-   docker push your-account-id.dkr.ecr.your-region.amazonaws.com/lambda-postgres-image:latest
+   docker tag postgres-container-runtime-functione:latest your-account-id.dkr.ecr.your-region.amazonaws.com/postgres-container-runtime-function:latest
+   docker push your-account-id.dkr.ecr.your-region.amazonaws.com/postgres-container-runtime-function:latest
    ```
 
 ## Usage
@@ -57,10 +56,11 @@ AWS Lambda functions, by default, face challenges when connecting to PostgreSQL 
 
 Ensure you set the following environment variables in your Lambda function:
 
-- `DB_HOST`: Your PostgreSQL RDS endpoint
-- `DB_NAME`: Database name
-- `DB_USER`: Database username
-- `DB_PASSWORD`: Database password
+- `RDS_HOST`: Your PostgreSQL RDS endpoint
+- `RDS_NAME`: RDS name
+- `RDS_USER`: RDS username
+- `RDS_PASSWORD`: RDS password
+- `RDS_PORT`: RDS port
 
 ## License
 
